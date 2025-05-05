@@ -5,9 +5,11 @@ using UnityEngine;
 public class IACharacterVehiculoSoldier : IACharacterVehiculo
 {
     Vector3 normales = Vector3.zero;
+    public bool ISDrawGizmos = false;
     // Start is called before the first frame update
     void Start()
     {
+        ISDrawGizmos=true;
         this.LoadComponent();
     }
     public override void LoadComponent()
@@ -68,8 +70,7 @@ public class IACharacterVehiculoSoldier : IACharacterVehiculo
 
     private void OnDrawGizmos()
     {
-        if (health == null || health.AimOffset == null || AIEye == null || AIEye.mainDataView == null) //new
-            return; //new
+        if (!ISDrawGizmos) return;
         Ray[] arrayRay = new Ray[3];
         arrayRay[0] = new Ray(health.AimOffset.position, health.AimOffset.right);
         arrayRay[1] = new Ray(health.AimOffset.position, -health.AimOffset.forward);
